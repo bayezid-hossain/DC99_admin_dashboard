@@ -18,6 +18,12 @@
       "@iso/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/containers/SignInContainer/index.js",
+    "src/pages/index.js"
+  ],
   "exclude": ["node_modules"]
 }

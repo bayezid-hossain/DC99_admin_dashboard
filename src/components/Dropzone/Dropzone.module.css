@@ -1,0 +1,59 @@
+/* Dropzone.module.css */
+
+.dropzone {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: border 0.3s ease;
+}
+
+.drag-active {
+  border-color: #ff4081;
+}
+
+.dropzone-input {
+  display: none;
+}
+
+.dropzone-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dropzone-text {
+  margin: 20px 0;
+  font-size: 16px;
+  color: #555;
+}
+
+.selected-files {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-gap: 10px;
+  margin-top: 20px;
+}
+
+.file {
+  position: relative;
+}
+
+.file img {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+}
+
+.remove-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 4px 8px;
+  background-color: #ff4081;
+  color: #fff;
+  font-size: 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
