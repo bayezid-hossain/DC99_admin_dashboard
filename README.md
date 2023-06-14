@@ -1,4 +1,4 @@
-this is admin dashboatd for ds99 project
+this is admin dashboatd for dc99 project
 
 
 yarn install
