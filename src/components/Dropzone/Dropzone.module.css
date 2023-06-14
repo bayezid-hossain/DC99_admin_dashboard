@@ -57,3 +57,32 @@
   border-radius: 4px;
   cursor: pointer;
 }
+
+.gallery-thumbnails {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.preview-image {
+  width: 600px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.thumbnail-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  border: 2px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+.thumbnail-image:hover {
+  border-color: #333;
+}

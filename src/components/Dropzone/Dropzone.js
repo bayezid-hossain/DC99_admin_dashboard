@@ -14,15 +14,7 @@ const Dropzone = ({ onDrop, removeFile, maxFiles }) => {
         file.type.startsWith('image/')
       );
 
-      const newFiles = [...files];
-      imageFiles.forEach((newFile) => {
-        const isDuplicate = files.some(
-          (existingFile) => existingFile.name === newFile.name
-        );
-        if (!isDuplicate) {
-          newFiles.push(newFile);
-        }
-      });
+      const newFiles = [...imageFiles];
 
       setFiles(newFiles);
 
@@ -49,34 +41,37 @@ const Dropzone = ({ onDrop, removeFile, maxFiles }) => {
       className={`${styles.dropzone} ${isDragActive && styles['drag-active']}`}
       {...getRootProps()}
     >
-      <input
-        className={styles['dropzone-input']}
-        {...getInputProps({ multiple: true })}
-      />
+      <input className={styles['dropzone-input']} {...getInputProps()} />
       <div className={styles['dropzone-content']}>
         {isDragActive ? (
-          <p className={styles['dropzone-text']}>Drop the files here...</p>
+          <p className={styles['dropzone-text']}>Drop the file here...</p>
         ) : (
           <p className={styles['dropzone-text']}>
-            Drag &apos;n&apos; drop some files here, or click to select files
+            Drag &apos;n&apos; drop a file here, or click to select a file
           </p>
         )}
-        <div className={styles['selected-files']}>
-          {files.map((file, index) => (
-            <div className={styles['file']} key={index}>
-              <img src={URL.createObjectURL(file)} alt={`File ${index + 1}`} />
-              <button
-                className={styles['remove-button']}
-                onClick={(event) => {
-                  event.stopPropagation();
-                  handleRemoveFile(index);
-                }}
-              >
-                Remove
-              </button>
+        {files.length > 0 && (
+          <div className={styles['product-gallery']}>
+            <div className={styles['gallery-preview']}>
+              <img
+                src={URL.createObjectURL(files[0])}
+                alt="Selected File"
+                className={styles['preview-image']}
+              />
             </div>
-          ))}
-        </div>
+            <div className={styles['gallery-thumbnails']}>
+              {files.map((file, index) => (
+                <img
+                  key={index}
+                  src={URL.createObjectURL(file)}
+                  alt="Selected File"
+                  className={styles['thumbnail-image']}
+                  onClick={() => handleRemoveFile(index)}
+                />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
