@@ -129,6 +129,7 @@
   align-items: center;
 }
 .product-gallery {
+  display: flex;
 }
 .gallery-preview {
   display: flex;
