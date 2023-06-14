@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { palette } from 'styled-theme';
 import WithDirection from '@iso/library/helpers/rtl';
 
-import bgImage from '/home/forsaken/React/admin_dashboard/src/assets/images/sign.jpg';
+import bgImage from '../../assets/images/sign.jpg';
 
 const SignInStyleWrapper = styled.div`
   width: 100%;

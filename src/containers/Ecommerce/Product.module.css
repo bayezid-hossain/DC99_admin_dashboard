@@ -126,14 +126,6 @@
   width: 100%;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-}
-.product-gallery {
-}
-.gallery-preview {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .preview-image {
   width: 600px;
