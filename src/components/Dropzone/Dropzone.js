@@ -4,7 +4,7 @@ import styles from './Dropzone.module.css';
 
 const Dropzone = ({ onDrop, removeFile, maxFiles }) => {
   const [files, setFiles] = useState([]);
-
+  const [selectedFile, setSelectedFile] = useState(null);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: 'image/*',
     maxSize: 5 * 1024 * 1024, // 5MB
@@ -17,7 +17,7 @@ const Dropzone = ({ onDrop, removeFile, maxFiles }) => {
       const newFiles = [...imageFiles];
 
       setFiles(newFiles);
-
+      if (!selectedFile) setSelectedFile(newFiles[0]);
       if (onDrop) {
         onDrop(newFiles);
       }
@@ -27,9 +27,11 @@ const Dropzone = ({ onDrop, removeFile, maxFiles }) => {
       }
     },
   });
-
-  const handleRemoveFile = (index) => {
+  const handleRemoveFile = (index, event) => {
+    event.stopPropagation();
     const newFiles = files.filter((_, i) => i !== index);
+    const selected = files[index];
+    setSelectedFile(selected);
     setFiles(newFiles);
     if (removeFile) {
       removeFile(newFiles);
@@ -50,24 +52,35 @@ const Dropzone = ({ onDrop, removeFile, maxFiles }) => {
             Drag &apos;n&apos; drop a file here, or click to select a file
           </p>
         )}
+
         {files.length > 0 && (
           <div className={styles['product-gallery']}>
             <div className={styles['gallery-preview']}>
               <img
-                src={URL.createObjectURL(files[0])}
+                src={selectedFile ? URL.createObjectURL(selectedFile) : ''}
                 alt="Selected File"
                 className={styles['preview-image']}
               />
             </div>
             <div className={styles['gallery-thumbnails']}>
               {files.map((file, index) => (
-                <img
-                  key={index}
-                  src={URL.createObjectURL(file)}
-                  alt="Selected File"
-                  className={styles['thumbnail-image']}
-                  onClick={() => handleRemoveFile(index)}
-                />
+                <div className={styles['thumbnail-wrapper']} key={index}>
+                  <img
+                    src={URL.createObjectURL(file)}
+                    alt="Selected File"
+                    className={styles['thumbnail-image']}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      setSelectedFile(files[index]);
+                    }}
+                  />
+                  <button
+                    className={`${styles['remove-button']} ${styles['cross-button']}`}
+                    onClick={(event) => handleRemoveFile(index, event)}
+                  >
+                    <span className={styles['cross-icon']}>&times;</span>
+                  </button>
+                </div>
               ))}
             </div>
           </div>

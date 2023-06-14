@@ -297,3 +297,9 @@
 .cancel-button {
   background-color: #999;
 }
+
+.gallery-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

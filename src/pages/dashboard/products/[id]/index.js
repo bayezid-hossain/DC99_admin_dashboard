@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import SingleProductInfo from '../../../containers/Ecommerce/SingleProductInfo';
-import siteConfig from '../../../config/site.config';
-import styles from '../../../containers/Ecommerce/Product.module.css';
-import Sidebar from '../../../containers/Sidebar/Sidebar';
-
+import SingleProductInfo from '../../../../containers/Ecommerce/SingleProductInfo';
+import siteConfig from '../../../../config/site.config';
+import styles from '../../../../containers/Ecommerce/Product.module.css';
+import Sidebar from '../../../../containers/Sidebar/Sidebar';
 const ProductPage = ({ productId }) => {
   const [product, setProduct] = useState(null);
   const router = useRouter();
