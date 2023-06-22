@@ -47,3 +47,25 @@
 .category-checkbox input[type='checkbox'] {
   margin-right: 0.5rem;
 }
+
+.thumbnail-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumbnail-image {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dropzone-wrapper {
+  margin-left: 20px; /* Adjust the margin as needed */
+}
+.preview-image {
+  max-width: 100%;
+  max-height: 100%;
+}

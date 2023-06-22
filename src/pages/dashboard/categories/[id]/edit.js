@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import SingleCategoryInfo from '../../../containers/Ecommerce/SingleCategoryInfo';
-import siteConfig from '../../../config/site.config';
-import styles from '../../../containers/Ecommerce/Product.module.css';
-import Sidebar from '../../../containers/Sidebar/Sidebar';
-
+import UpdateCategory from '../../../../containers/Ecommerce/UpdateCategory';
+import siteConfig from '../../../../config/site.config';
+import Sidebar from '../../../../containers/Sidebar/Sidebar';
+import styles from '../../../../containers/Ecommerce/Product.module.css';
 const CategoryPage = ({ categoryId }) => {
   const [category, setCategory] = useState(null);
   const router = useRouter();
@@ -26,7 +25,8 @@ const CategoryPage = ({ categoryId }) => {
   }
 
   const handleNavigate = (path) => {
-    router.push(path);
+    router.replace(path);
+    // router.reload(0);
   };
 
   return (
@@ -36,10 +36,7 @@ const CategoryPage = ({ categoryId }) => {
           <Sidebar />
         </div>
         <div className={styles['product-info-container']}>
-          <SingleCategoryInfo
-            category={category}
-            handleNavigate={handleNavigate}
-          />
+          <UpdateCategory category={category} handleNavigate={handleNavigate} />
         </div>
       </div>
       <footer className={styles['footer']}>{siteConfig.footerText}</footer>

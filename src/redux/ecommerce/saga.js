@@ -1,6 +1,6 @@
-import { all, takeEvery, put } from 'redux-saga/effects';
+import { all, takeEvery, takeLatest, put } from 'redux-saga/effects';
 import actions from './actions';
-
+import { toast } from 'react-toastify';
 export function* changedCard() {
   yield takeEvery(actions.CHANGE_CARDS, function* () {});
 }
@@ -217,6 +217,62 @@ export function* createCategory(action) {
   }
 }
 
+export function* updateCategories(action) {
+  try {
+    const { payload } = action;
+    const { categoryData, navigate } = payload;
+    const formData = new FormData();
+    formData.append('name', categoryData.name);
+    formData.append('price', '0');
+    formData.append('description', categoryData.description);
+    // Append each image file to the FormData object
+    formData.append('image', categoryData.image);
+
+    // Make the createCategory API call with the formData
+    const response = yield fetch(
+      `http://localhost:4000/api/v1/admin/categories/${categoryData.id}`,
+      {
+        method: 'PUT',
+        body: formData,
+        credentials: 'include',
+      }
+    );
+
+    if (response.ok) {
+      // Product successfully created
+      const data = yield response.json();
+
+      // Dispatch the create CATEGORY success action
+      yield put({
+        type: actions.UPDATE_CATEGORIES_SUCCESS,
+        payload: {
+          category: data.category,
+        },
+      });
+
+      // Navigate to the dashboard/categories page
+      //navigate.replace('/dashboard/categories');
+      navigate(`/dashboard/categories/`);
+    } else {
+      // Handle error response
+      yield put({
+        type: actions.UPDATE_CATEGORIES_FAILURE,
+        payload: {
+          error: response.statusText,
+        },
+      });
+    }
+  } catch (error) {
+    // Handle network or other errors
+    yield put({
+      type: actions.UPDATE_CATEGORIES_FAILURE,
+      payload: {
+        error: error.message,
+      },
+    });
+  }
+}
+
 export function* fetchCategories() {
   try {
     // Make the API call to fetch the categories
@@ -241,6 +297,20 @@ export function* fetchCategories() {
   }
 }
 
+function* handleUpdateCategorySuccess(action) {
+  const { category } = action.payload;
+
+  // Show the success toast notification
+  toast.success('Category updated successfully');
+
+  // Perform other logic if needed
+  // ...
+}
+
+function* handleUpdateCategoryFailure(action) {
+  const { error } = action.payload;
+  toast.error(error);
+}
 export default function* Saga() {
   yield all([
     takeEvery(actions.INIT_DATA_SAGA, initData),
@@ -249,5 +319,8 @@ export default function* Saga() {
     takeEvery(actions.CREATE_CATEGORY, createCategory),
     takeEvery(actions.FETCH_CATEGORIES, fetchCategories),
     takeEvery(actions.DELETE_CATEGORY, deleteCategory),
+    takeEvery(actions.UPDATE_CATEGORIES, updateCategories),
+    takeLatest(actions.UPDATE_CATEGORIES_SUCCESS, handleUpdateCategorySuccess),
+    takeLatest(actions.UPDATE_CATEGORIES_FAILURE, handleUpdateCategoryFailure),
   ]);
 }

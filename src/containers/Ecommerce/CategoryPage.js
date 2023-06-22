@@ -14,11 +14,12 @@ const CategoryPage = () => {
     (state) => state.Ecommerce
   );
   console.log(categories);
+  if (!categories) {
+    // Reload the page
+    window.location.reload();
+    return null; // Render nothing until the page reloads
+  }
   const [searchTerm, setSearchTerm] = useState('');
-
-  useEffect(() => {
-    dispatch({ type: actions.FETCH_CATEGORIES });
-  }, [dispatch]);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);

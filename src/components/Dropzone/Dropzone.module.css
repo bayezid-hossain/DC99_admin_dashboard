@@ -125,3 +125,9 @@
 .cross-icon:hover {
   color: #ff0000;
 }
+
+.gallery-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

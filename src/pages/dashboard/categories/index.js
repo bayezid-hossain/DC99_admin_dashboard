@@ -9,7 +9,7 @@ import CategoryPage from '../../../containers/Ecommerce/CategoryPage';
 export default withAuthSync(() => (
   <div className={styles['page-container']}>
     <Head>
-      <title>Products</title>
+      <title>Categories</title>
     </Head>
     <div className={styles['content-container']}>
       <div className={styles['sidebar-container']}>

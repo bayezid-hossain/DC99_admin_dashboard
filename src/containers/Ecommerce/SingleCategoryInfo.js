@@ -14,7 +14,9 @@ const SingleCategoryInfo = ({ category, handleNavigate }) => {
   const handleCancelClick = () => {
     setIsModalOpen(false);
   };
-
+  const handleEditClick = () => {
+    handleNavigate(`/dashboard/categories/${category._id}/edit`);
+  };
   const handleDeleteConfirmation = async () => {
     try {
       // Call your delete API endpoint here
@@ -42,7 +44,7 @@ const SingleCategoryInfo = ({ category, handleNavigate }) => {
           <div className={styles['action-buttons']}>
             <button
               className={`${styles['action-button']} ${styles['edit-button']}`}
-              // onClick={handleEditClick}
+              onClick={handleEditClick}
             >
               Edit
             </button>

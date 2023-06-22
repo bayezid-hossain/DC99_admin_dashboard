@@ -18,6 +18,9 @@ const actions = {
   FETCH_CATEGORIES: 'ECOMMERCE_FETCH_CATEGORIES',
   FETCH_CATEGORIES_SUCCESS: 'ECOMMERCE_FETCH_CATEGORIES_SUCCESS',
   FETCH_CATEGORIES_FAILURE: 'ECOMMERCE_FETCH_CATEGORIES_FAILURE',
+  UPDATE_CATEGORIES: 'ECOMMERCE_UPDATE_CATEGORIES',
+  UPDATE_CATEGORIES_SUCCESS: 'ECOMMERCE_UPDATE_CATEGORIES_SUCCESS',
+  UPDATE_CATEGORIES_FAILURE: 'ECOMMERCE_UPDATE_CATEGORIES_FAILURE',
 
   // Existing actions
   initData: () => ({ type: actions.INIT_DATA_SAGA }),
@@ -38,6 +41,13 @@ const actions = {
   }),
   fetchCategories: () => ({
     type: actions.FETCH_CATEGORIES,
+  }),
+  updateCategories: (categoryData, navigate) => ({
+    type: actions.UPDATE_CATEGORIES,
+    payload: {
+      categoryData,
+      navigate,
+    },
   }),
 };
 export default actions;

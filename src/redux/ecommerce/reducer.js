@@ -64,7 +64,11 @@ export default (state = initState, action) => {
         ...state,
         categories: action.payload.categories,
       };
-
+    case actions.UPDATE_CATEGORIES_SUCCESS:
+      return {
+        ...state,
+        categories: action.payload.categories,
+      };
     default:
       return state;
   }

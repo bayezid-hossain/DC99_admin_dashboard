@@ -1,5 +1,6 @@
 import React from 'react';
-import App from 'next/app';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Provider } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import initStore from '../redux/store';
@@ -13,6 +14,7 @@ function CustomApp({ Component, pageProps, store }) {
   return (
     <Provider store={store}>
       <Component {...pageProps} />
+      <ToastContainer />
     </Provider>
   );
 }
